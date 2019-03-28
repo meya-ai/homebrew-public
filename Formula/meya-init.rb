@@ -82,6 +82,7 @@ class MeyaInit < Formula
     sha256 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 
     depends_on "python@3"
+    depends_on "direnv"
     depends_on "git"
     depends_on "node"
     depends_on "yarn"
