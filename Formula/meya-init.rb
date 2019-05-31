@@ -4,20 +4,6 @@ $source = <<~EOS
 # Stop if there's an error
 set -e
 
-# Check that the only arg is "init"
-if [[ "$#" -ne 1 || "$1" != "init" ]] ; then
-    echo "usage: meya init" >&2
-    echo >&2
-    echo "Run this command in an empty directory to initialize a Meya app" >&2
-    exit 1
-fi
-
-# Check that the current directory is empty
-if [[ -n $(ls -A .) ]] ; then
-    echo "Cannot init here, directory not empty" >&2
-    exit 1
-fi
-
 # Set up direnv
 echo "Setting up Python virtual environment..." >&2
 cat > .envrc << 'EOF'
@@ -55,23 +41,11 @@ eval "$(direnv export bash)"
 
 # Install meya-sdk
 echo "Installing Meya SDK from Pip..." >&2
-pip install -e "git+git@github.com:meya-ai/grid.git@init.sh#egg=grid_sdk&subdirectory=public/grid-sdk"
-pip install -e "git+git@github.com:meya-ai/grid.git@init.sh#egg=meya_sdk&subdirectory=public/meya-sdk"
+pip install -e "git+git@github.com:meya-ai/grid.git@meya-init-part-2#egg=grid_sdk&subdirectory=public/grid-sdk"
+pip install -e "git+git@github.com:meya-ai/grid.git@meya-init-part-2#egg=meya_sdk&subdirectory=public/meya-sdk"
 
-# Set up Git
-echo "Setting up Git..." >&2
-cat > .gitignore << 'EOF'
-.direnv
-.idea/*
-.meya
-.pytest_cache
-__pycache__
-node_modules
-EOF
-git init
-
-# Run meya init
-meya init
+# Run meya
+meya $@
 EOS
 
 class MeyaInit < Formula
