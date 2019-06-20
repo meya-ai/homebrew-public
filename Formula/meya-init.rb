@@ -41,8 +41,7 @@ eval "$(direnv export bash)"
 
 # Install meya-sdk
 echo "Installing Meya SDK from Pip..." >&2
-pip install -e "git+git@github.com:meya-ai/grid.git@master#egg=grid_sdk&subdirectory=public/grid-sdk"
-pip install -e "git+git@github.com:meya-ai/grid.git@master#egg=meya_sdk&subdirectory=public/meya-sdk"
+pip install --extra-index-url https://registry.meya.ai/pypi meya-sdk
 
 # Run meya
 meya $@
