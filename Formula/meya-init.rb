@@ -50,7 +50,7 @@ EOS
 class MeyaInit < Formula
     desc "Initialization for Meya SDK"
     homepage "https://meya.ai/"
-    version "0.1"
+    version "0.2"
     url "file:///dev/null"
     sha256 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 
