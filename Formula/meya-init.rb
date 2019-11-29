@@ -40,8 +40,12 @@ direnv allow
 eval "$(direnv export bash)"
 
 # Install meya-sdk
-echo "Installing Meya SDK from Pip..." >&2
-pip install --extra-index-url https://registry.meya.ai/pypi meya-sdk
+echo "Installing Meya SDK..." >&2
+if [ -z "$GRID_DEV_MODE_PATH" ]; then
+    pip install --extra-index-url https://meya:$MEYA_AUTH_TOKEN@registry.meya.ai/pypi meya-sdk
+else
+    pip install -e "$GRID_DEV_MODE_PATH"/public/{meya-sdk,grid-sdk}
+fi
 
 # Run meya
 meya $@
